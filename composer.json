@@ -27,21 +27,11 @@
   },
   "require": {
     "php": ">=5.4",
-    "composer/installers": "~1.0",
-    "laravel/framework": "4.2.*",
-    "brain/brain": "dev-master",
-    "brain/support": "dev-master",
-    "brain/amygdala": "dev-master",
-    "brain/striatum": "dev-master",
-    "brain/occipital": "dev-master",
-    "brain/cortex": "dev-master",
-    "symfony/routing": "2.*",
-    "symfony/var-dumper": "2.6.*"
+    "laravel/framework": "4.2.*"
   },
   "require-dev": {
     "phpunit/phpunit": "4.2.*",
-    "mockery/mockery": "dev-master",
-    "10up/wp_mock": "dev-master"
+    "mockery/mockery": "dev-master"
   },
   "config": {
     "preferred-install": "dist",
