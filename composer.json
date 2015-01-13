@@ -1,0 +1,54 @@
+{
+  "name": "bruno-barros/w.eloquent-bus",
+  "description": "w.eloquent Command Bus Pattern.",
+  "keywords": [
+    "Laravel",
+    "framework",
+    "WordPress",
+    "Command Bus"
+  ],
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "Bruno Barros",
+      "email": "brunodanca@gmail.com"
+    }
+  ],
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "Weloquent\\Bus\\": "src/Bus"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Weloquent\\Bus\\Tests\\": "src/tests"
+    }
+  },
+  "require": {
+    "php": ">=5.4",
+    "composer/installers": "~1.0",
+    "laravel/framework": "4.2.*",
+    "brain/brain": "dev-master",
+    "brain/support": "dev-master",
+    "brain/amygdala": "dev-master",
+    "brain/striatum": "dev-master",
+    "brain/occipital": "dev-master",
+    "brain/cortex": "dev-master",
+    "symfony/routing": "2.*",
+    "symfony/var-dumper": "2.6.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.2.*",
+    "mockery/mockery": "dev-master",
+    "10up/wp_mock": "dev-master"
+  },
+  "config": {
+    "preferred-install": "dist",
+    "optimize-autoloader": true
+  },
+  "extra": {
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

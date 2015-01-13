@@ -1,0 +1,16 @@
+<phpunit bootstrap="src/tests/bootstrap.php"
+         colors="false"
+         convertErrorsToExcetions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         stopOnFailure="true">
+    <listeners>
+        <listener class="\Mockery\Adapter\Phpunit\TestListener"></listener>
+    </listeners>
+    <testsuites>
+        <testsuite name="Unit">
+            <directory>./src/tests</directory>
+        </testsuite>
+
+    </testsuites>
+</phpunit>
