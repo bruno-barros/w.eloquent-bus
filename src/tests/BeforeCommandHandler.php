@@ -18,6 +18,7 @@ class BeforeCommandHandler implements CommandHandler{
 	 */
 	public function handle($command)
 	{
-		return 'before ' . $command->name;
+		$command->name = 'before ' . $command->name;
+		return $command;
 	}
 }

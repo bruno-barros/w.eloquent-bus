@@ -17,25 +17,17 @@ trait CommanderTrait
 	 * Execute the command
 	 *
 	 * @param  string $command
-	 * @param  array $input
-	 * @param  array $decorators
+	 * @param  array|null $input
+	 * @param  string|array $decorators
 	 * @return mixed
 	 */
-	public function execute($command, array $input = null, $decorators = [])
+	public function execute($command, $input = null, $decorators = [])
 	{
 		$input   = $input ?: Input::all();
-		$command = $this->mapInputToCommand($command, $input);
+		$command = $this->mapInputToCommand($command, (array)$input);
 		$bus     = $this->getCommandBus();
-		// If any decorators are passed, we'll
-		// filter through and register them
-		// with the CommandBus, so that they
-		// are executed first.
-		foreach ($decorators as $decorator)
-		{
-			$bus->decorate($decorator);
-		}
 
-		return $bus->execute($command);
+		return $bus->before($decorators)->execute($command);
 	}
 
 	/**

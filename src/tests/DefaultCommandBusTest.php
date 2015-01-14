@@ -24,7 +24,9 @@ class DefaultCommandBusTest extends TestCase
 
 		$this->bus = new DefaultCommandBus($c->make('Weloquent\Core\Application'),
 			$c->make('Weloquent\Bus\BasicCommandTranslator'));
+
 	}
+
 
 	/**
 	 * @test
@@ -55,5 +57,18 @@ class DefaultCommandBusTest extends TestCase
 
 		assertEquals('before foo', $return);
 	}
+
+	/**
+	 * @test
+	 */
+	public function it_should_the_sabe_as_before()
+	{
+
+		$return = $this->bus->decorate('Weloquent\Bus\Tests\BeforeCommandHandler')
+			->execute(new FakeCommand('baz'));
+
+		assertEquals('before baz', $return);
+	}
+
 
 }

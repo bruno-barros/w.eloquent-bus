@@ -22,14 +22,9 @@ class DefaultCommandBus implements CommandBus
 	 * @var CommandTranslator
 	 */
 	protected $commandTranslator;
-	/**
-	 * List of optional decorators for command bus.
-	 *
-	 * @var array
-	 */
-	protected $decorators = [];
 
 	/**
+	 * List of decorators
 	 * @var array
 	 */
 	private $before = [];
@@ -52,18 +47,18 @@ class DefaultCommandBus implements CommandBus
 	/**
 	 * Decorate the command bus with any executable actions.
 	 *
-	 * @param  string $className
-	 * @return mixed
+	 * @param string|array $decorators
+	 * @return $this
 	 */
-	public function decorate($className)
+	public function decorate($decorators)
 	{
-		$this->decorators[] = $className;
+		return $this->before($decorators);
 	}
 
 	/**
 	 * Set decorators to run before execute command
 	 *
-	 * @param array $decorators
+	 * @param string|array $decorators
 	 * @return $this
 	 */
 	public function before($decorators = array())
@@ -88,7 +83,6 @@ class DefaultCommandBus implements CommandBus
 	}
 
 
-
 	/**
 	 * Execute the command
 	 *
@@ -104,15 +98,7 @@ class DefaultCommandBus implements CommandBus
 		$command = $this->app->make($handlerName)->handle($command);
 
 		return $this->executeDecorators($command, 'after');
-
-
-
-//		$this->executeDecorators($command);
-//		$handler = $this->commandTranslator->toCommandHandler($command);
-//
-//		return $this->app->make($handler)->handle($command);
 	}
-
 
 
 	/**
@@ -127,18 +113,16 @@ class DefaultCommandBus implements CommandBus
 	{
 		$commandState = $command;
 
-		dd($this->before);
-//		dd($this->$decoratorSide);
 		foreach ($this->$decoratorSide as $className)
 		{
-			if(! class_exists($className))
+			if (!class_exists($className))
 			{
 				throw new InvalidArgumentException("The decorate class [$className] does not exists.");
 			}
 
 			$instance = $this->app->make($className);
 
-			if (! $instance instanceof CommandHandler)
+			if (!$instance instanceof CommandHandler)
 			{
 				$message = 'The class to decorate must be an implementation of Weloquent\Bus\Contracts\CommandHandler';
 
@@ -152,23 +136,4 @@ class DefaultCommandBus implements CommandBus
 		return $commandState;
 	}
 
-	/**
-	 * Execute all registered decorators
-	 *
-	 * @param  object $command
-	 * @return null
-	 */
-	protected function __executeDecorators($command)
-	{
-		foreach ($this->decorators as $className)
-		{
-			$instance = $this->app->make($className);
-			if (!$instance instanceof CommandBus)
-			{
-				$message = 'The class to decorate must be an implementation of Weloquent\Bus\CommandBus';
-				throw new InvalidArgumentException($message);
-			}
-			$instance->execute($command);
-		}
-	}
 }
