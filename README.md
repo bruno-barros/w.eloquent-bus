@@ -29,7 +29,7 @@ Create your command and handler.
 		
 		public function handler($command){
 			
-			// do what ever you need
+			// do whatever you need
 		
 		}
 		
@@ -76,6 +76,19 @@ Look:
 - The decorator should return the command object. Can be the original, or modified one.
 
 
+	// Decorator
+	class DecoratorCommandHandler implements Weloquent\Bus\Contracts\CommandHandler {
+    		
+    		public function handler($command)
+    		{	
+    		    // apply any modification...
+    		    
+    			return $command;    		
+    		}
+    	}
+
+
+	// Decorating
 	class MyClass {
 	
 		use Weloquent\Bus\CommanderTrait;
