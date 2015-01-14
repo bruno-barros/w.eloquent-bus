@@ -75,30 +75,31 @@ Look:
 
 - The decorator should return the command object. Can be the original, or modified one.
 
+```
+// Decorator
+class DecoratorCommandHandler implements Weloquent\Bus\Contracts\CommandHandler {
+        
+        public function handler($command)
+        {	
+            // apply any modification...
+            
+            return $command;    		
+        }
+    }
 
-	# Decorator
-	class DecoratorCommandHandler implements Weloquent\Bus\Contracts\CommandHandler {
-    		
-    		public function handler($command)
-    		{	
-    		    // apply any modification...
-    		    
-    			return $command;    		
-    		}
-    	}
 
+// Decorating
+class MyClass {
 
-	# Decorating
-	class MyClass {
+	use Weloquent\Bus\CommanderTrait;
 	
-		use Weloquent\Bus\CommanderTrait;
-		
-		// From a POST
-		public function myMethod()
-		{						
-			$decorator = ['Your\Namespace\DecoratorCommandHandler'];
-		
-			$this->execute(new Your\Namespace\DoSomething, null, $decorator);
-		
-		}
+	// From a POST
+	public function myMethod()
+	{						
+		$decorator = ['Your\Namespace\DecoratorCommandHandler'];
+	
+		$this->execute(new Your\Namespace\DoSomething, null, $decorator);
+	
 	}
+}
+```
