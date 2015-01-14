@@ -76,7 +76,7 @@ Look:
 - The decorator should return the command object. Can be the original, or modified one.
 
 
-	// Decorator
+	# Decorator
 	class DecoratorCommandHandler implements Weloquent\Bus\Contracts\CommandHandler {
     		
     		public function handler($command)
@@ -88,7 +88,7 @@ Look:
     	}
 
 
-	// Decorating
+	# Decorating
 	class MyClass {
 	
 		use Weloquent\Bus\CommanderTrait;
